@@ -1,4 +1,4 @@
-import { isValidObjectId, Schema } from 'mongoose';
+import { isValidObjectId, Schema, UpdateQuery } from 'mongoose';
 import ICar from '../Interfaces/ICar';
 import AbstractODM from './AbstractODM';
 import InvalidFieldsError from '../errors/invalide-fields-error';
@@ -21,6 +21,17 @@ class CarsODM extends AbstractODM<ICar> {
   async getById(id:string): Promise<ICar> {
     if (!isValidObjectId(id)) throw new InvalidFieldsError('Invalid mongo id');
     const request = await this.model.findById(id);
+    if (request === null) throw new NotFoundError('Car not found');
+    return request;
+  }
+
+  async update(_id:string, obj: ICar): Promise<ICar | null> {
+    if (!isValidObjectId(_id)) throw new InvalidFieldsError('Invalid mongo id');
+    const request = await this.model.findByIdAndUpdate(
+      { _id },
+      { ...obj } as UpdateQuery<ICar>,
+      { new: true },
+    );
     if (request === null) throw new NotFoundError('Car not found');
     return request;
   }

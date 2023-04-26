@@ -2,7 +2,6 @@ import {
   Model,
   models,
   Schema,
-  // UpdateQuery,
   model,
 } from 'mongoose';
 

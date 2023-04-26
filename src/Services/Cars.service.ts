@@ -24,6 +24,12 @@ class CarsService {
     const result = request.map((e) => new Car(e));
     return result;
   }
+
+  async update(id:string, body:ICar):Promise<Car> {
+    const request = await this.carsODM.update(id, body);
+    const result = new Car(request as ICar);
+    return result; 
+  }
 }
  
 export default CarsService;

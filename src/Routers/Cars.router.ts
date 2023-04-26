@@ -12,11 +12,11 @@ const carsController = new CarsControlller(carsService);
 
 router.get('/:id', carsController.listById.bind(carsController));
 router.get('/', carsController.listAll.bind(carsController));
-
 router.post(
   '/', 
   validateRequiredFields('car'),
   carsController.register.bind(carsController),
 );
+router.put('/:id', carsController.updateCar.bind(carsController));
 
 export default router;
