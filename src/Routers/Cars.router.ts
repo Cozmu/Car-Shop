@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import validateRequiredFields from '../Middlewares/ValidateRequiredFields';
+import validateRequiredFields from '../validations/ValidateRequiredFields';
 import CarsControlller from '../Controllers/Cars.controller';
 import CarsODM from '../Models/CarsODM';
 import CarsService from '../Services/Cars.service';

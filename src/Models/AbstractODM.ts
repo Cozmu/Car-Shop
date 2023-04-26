@@ -7,7 +7,6 @@ import {
   UpdateQuery,
 } from 'mongoose';
 import InvalidFieldsError from '../errors/invalide-fields-error';
-import NotFoundError from '../errors/not-found-error';
 
 abstract class AbstractODM<T> {
   protected model: Model<T>;
@@ -29,10 +28,9 @@ abstract class AbstractODM<T> {
     return result; 
   }
 
-  async getById(id:string): Promise<T> {
+  async getById(id:string): Promise<T | null> {
     if (!isValidObjectId(id)) throw new InvalidFieldsError('Invalid mongo id');
     const request = await this.model.findById(id);
-    if (request === null) throw new NotFoundError('Car not found');
     return request;
   }
 
@@ -43,7 +41,6 @@ abstract class AbstractODM<T> {
       { ...obj } as UpdateQuery<T>,
       { new: true },
     );
-    if (request === null) throw new NotFoundError('Car not found');
     return request;
   }
 }

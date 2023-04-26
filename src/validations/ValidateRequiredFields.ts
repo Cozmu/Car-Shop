@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 
 const requestRequiredFields = {
   car: ['model', 'year', 'color', 'buyValue', 'doorsQty', 'seatsQty'],
+  motorcycle: ['model', 'year', 'color', 'buyValue', 'category', 'engineCapacity'],
 };
 
 const validateRequiredFields = (key: keyof typeof requestRequiredFields) =>
