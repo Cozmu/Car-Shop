@@ -19,5 +19,6 @@ router.post(
   validateRequiredFields('motorcycle'),
   motorcyclesController.register.bind(motorcyclesController),
 );
+router.put('/:id', motorcyclesController.updateCar.bind(motorcyclesController));
 
 export default router;

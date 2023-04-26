@@ -29,6 +29,13 @@ class MotorcyclesServices {
     const result = request.map((e) => new Motorcycle(e));
     return result;
   }
+
+  async update(id:string, body:IMotorcycle):Promise<Motorcycle> {
+    const request = await this.motorcyclesODM.update(id, body);
+    if (request === null) throw new NotFoundError('Motorcycle not found');
+    const result = new Motorcycle(request as IMotorcycle);
+    return result; 
+  }
 }
 
 export default MotorcyclesServices;

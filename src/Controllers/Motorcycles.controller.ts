@@ -29,6 +29,16 @@ class MotorcyclesController {
     const result = await this.motorcyclesService.getAll(); 
     return res.status(200).json(result);
   }
+
+  async updateCar(req:Request, res:Response, next:NextFunction):Promise<Response | undefined> {
+    try {
+      const { id } = req.params;
+      const result = await this.motorcyclesService.update(id, req.body);
+      return res.status(200).json(result);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 export default MotorcyclesController;
