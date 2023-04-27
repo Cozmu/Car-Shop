@@ -8,6 +8,8 @@ import {
 } from 'mongoose';
 import InvalidFieldsError from '../errors/invalide-fields-error';
 
+const INVALID_MONGO_ID = 'Invalid mongo id'; 
+
 abstract class AbstractODM<T> {
   protected model: Model<T>;
   protected schema: Schema;
@@ -29,18 +31,24 @@ abstract class AbstractODM<T> {
   }
 
   async getById(id:string): Promise<T | null> {
-    if (!isValidObjectId(id)) throw new InvalidFieldsError('Invalid mongo id');
+    if (!isValidObjectId(id)) throw new InvalidFieldsError(INVALID_MONGO_ID);
     const request = await this.model.findById(id);
     return request;
   }
 
   async update(_id:string, obj: T): Promise<T | null> {
-    if (!isValidObjectId(_id)) throw new InvalidFieldsError('Invalid mongo id');
+    if (!isValidObjectId(_id)) throw new InvalidFieldsError(INVALID_MONGO_ID);
     const request = await this.model.findByIdAndUpdate(
       { _id },
       { ...obj } as UpdateQuery<T>,
       { new: true },
     );
+    return request;
+  }
+
+  async delete(id:string):Promise<T | null> {
+    if (!isValidObjectId(id)) throw new InvalidFieldsError(INVALID_MONGO_ID);
+    const request = await this.model.findByIdAndDelete(id);
     return request;
   }
 }

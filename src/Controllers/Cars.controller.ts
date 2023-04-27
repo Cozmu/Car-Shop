@@ -35,6 +35,16 @@ class CarsControlller {
       next(error);
     }
   }
+
+  async deleteCar(req:Request, res:Response, next:NextFunction):Promise<Response | undefined> {
+    try {
+      const { id } = req.params;
+      await this.carsService.delete(id);
+      return res.status(204).send();
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 export default CarsControlller;

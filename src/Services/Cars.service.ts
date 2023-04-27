@@ -3,6 +3,8 @@ import NotFoundError from '../errors/not-found-error';
 import ICar from '../Interfaces/ICar';
 import CarsODM from '../Models/CarsODM';
 
+const CAR_NOT_FOUND = 'Car not found';
+
 class CarsService {
   constructor(
     private carsODM: CarsODM,
@@ -16,7 +18,7 @@ class CarsService {
 
   async getById(id:string):Promise<Car> {
     const request = await this.carsODM.getById(id);
-    if (request === null) throw new NotFoundError('Car not found');
+    if (request === null) throw new NotFoundError(CAR_NOT_FOUND);
     const result = new Car(request);
     return result;
   }
@@ -29,9 +31,15 @@ class CarsService {
 
   async update(id:string, body:ICar):Promise<Car> {
     const request = await this.carsODM.update(id, body);
-    if (request === null) throw new NotFoundError('Car not found');
+    if (request === null) throw new NotFoundError(CAR_NOT_FOUND);
     const result = new Car(request as ICar);
     return result; 
+  }
+
+  async delete(id:string):Promise<ICar> {
+    const request = await this.carsODM.delete(id);
+    if (request === null) throw new NotFoundError(CAR_NOT_FOUND);
+    return request;
   }
 }
  

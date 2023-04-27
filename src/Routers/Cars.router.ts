@@ -18,5 +18,6 @@ router.post(
   carsController.register.bind(carsController),
 );
 router.put('/:id', carsController.updateCar.bind(carsController));
+router.delete('/:id', carsController.deleteCar.bind(carsController));
 
 export default router;

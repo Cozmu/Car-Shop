@@ -30,11 +30,23 @@ class MotorcyclesController {
     return res.status(200).json(result);
   }
 
-  async updateCar(req:Request, res:Response, next:NextFunction):Promise<Response | undefined> {
+  async updateMotorcycle(req:Request, res:Response, next:NextFunction)
+    :Promise<Response | undefined> {
     try {
       const { id } = req.params;
       const result = await this.motorcyclesService.update(id, req.body);
       return res.status(200).json(result);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async deleteMotorcycle(req:Request, res:Response, next:NextFunction)
+    :Promise<Response | undefined> {
+    try {
+      const { id } = req.params;
+      await this.motorcyclesService.delete(id);
+      return res.status(204).send();
     } catch (error) {
       next(error);
     }
