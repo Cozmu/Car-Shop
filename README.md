@@ -29,6 +29,9 @@
 - Execute o comando `docker-compose up -d`.
 - Execute o comando `npm install`.
 
+( ATEÇÃO: TODOS OS SCRIPTS DO PACKAGE.JSON DEVEM SER EXECUTADOS DENTRO DO TERMINAL DO CONTAINER DOCKER!! )
+
+
 ## Como contribuir no projeto:
   1. Faça um **fork** do projeto;
   2. Crie uma nova branch com as suas alterações: `git checkout -b my-feature`;
