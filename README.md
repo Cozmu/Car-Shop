@@ -2,6 +2,8 @@
 
 #### Nesse projeto apliquei os princípios de Programação Orientada a Objetos (POO) para construção de uma API com CRUD para gerenciar uma concessionária de veículos. Isso foi feito utilizando o banco de dados MongoDB através do framework Mongoose.
 
+## Tecnologias:
+
 <ul>
   <li>Node</li>
   <li>TypeScript</li>
